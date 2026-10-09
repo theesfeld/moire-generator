@@ -1,0 +1,77 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Moiré Generator</title>
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect fill='%23110f0c' width='32' height='32'/%3E%3Cpath stroke='%23e6a44b' stroke-width='1.4' d='M4 8h24M4 13h24M4 18h24M4 23h24M6 4v24M12 4v24M18 4v24M24 4v24'/%3E%3C/svg%3E" />
+    <link rel="stylesheet" href="/src/style.css" />
+  </head>
+  <body>
+    <div id="app">
+      <header id="top">
+        <div class="brand">
+          <h1>Moiré Generator</h1>
+          <p>Closed-form gratings, multiplied. The fringes are the beat.</p>
+        </div>
+        <div class="top-actions">
+          <label class="preset">
+            <span>Preset</span>
+            <select id="preset"></select>
+          </label>
+          <p id="loop-flag" class="loop-flag">Loop</p>
+        </div>
+      </header>
+      <main id="stage">
+        <canvas id="view"></canvas>
+        <canvas id="overlay"></canvas>
+        <button id="exit-projection" type="button">Exit projection</button>
+      </main>
+      <aside id="panel">
+        <section id="layer-section">
+          <div class="section-head">
+            <h2>Layers</h2>
+            <div class="add-wrap">
+              <button id="add-layer" type="button">Add</button>
+              <div id="add-menu" hidden></div>
+            </div>
+          </div>
+          <div id="layer-list"></div>
+        </section>
+        <section id="inspector"></section>
+      </aside>
+      <footer id="transport">
+        <div class="transport-row">
+          <button id="play" type="button" aria-label="Play or pause">Pause</button>
+          <input id="scrub" type="range" min="0" max="1" step="0.0001" value="0" aria-label="Loop phase" />
+          <output id="phase-read">0.000</output>
+          <label>Loop <input id="loop-seconds" type="number" min="0.5" max="120" step="0.5" value="6" /> s</label>
+          <label>Playback <input id="playback" type="number" min="0.05" max="8" step="0.05" value="1" /></label>
+          <label>Motion × <input id="motion" type="number" min="-8" max="8" step="1" value="1" /></label>
+        </div>
+        <div class="transport-row">
+          <button id="webm" type="button" class="primary">WebM</button>
+          <button id="mp4" type="button">MP4</button>
+          <button id="png" type="button">PNG</button>
+          <button id="gif" type="button">GIF</button>
+          <label>W <input id="export-w" type="number" min="16" max="3840" step="1" value="1080" /></label>
+          <label>H <input id="export-h" type="number" min="16" max="3840" step="1" value="1080" /></label>
+          <label>GIF frames <input id="export-frames" type="number" min="2" max="4000" step="1" value="48" /></label>
+          <label>Video fps <input id="export-fps" type="number" min="1" max="120" step="1" value="60" /></label>
+          <button id="size-square" type="button">1080²</button>
+          <button id="size-hd" type="button">1920×1080</button>
+          <button id="size-story" type="button">1080×1920</button>
+          <button id="json-save" type="button">Save</button>
+          <button id="json-load" type="button">Load</button>
+          <button id="snap" type="button">Snap to loop</button>
+          <button id="project" type="button">Project</button>
+          <span id="export-status"></span>
+          <input id="json-file" type="file" accept="application/json,.json" hidden />
+        </div>
+        <p class="hints">Drag a center. Wheel changes frequency, shift-wheel rotates, alt-wheel changes duty. Space plays. F projects. H hides the panels. WebM and MP4 step through the loop at the video fps.</p>
+      </footer>
+    </div>
+    <pre id="probe" hidden></pre>
+    <script type="module" src="/src/main.ts"></script>
+  </body>
+</html>
